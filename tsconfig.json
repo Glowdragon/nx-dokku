@@ -14,7 +14,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@nx-dokku/source": ["src/index.ts"]
+      "@glowdragon/nx-dokku": ["src/index.ts"]
     }
   },
   "files": [],
