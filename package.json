@@ -1,6 +1,6 @@
 {
   "name": "@glowdragon/nx-dokku",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Nx plugin for deploying to Dokku",
   "keywords": [
     "nx",
