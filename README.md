@@ -32,7 +32,7 @@ After installation, you'll need to configure the deploy executor in the project'
 ```json
 {
   "projects": {
-    "your-project-name": {
+    "your-nx-project": {
       "architect": {
         "deploy": {
           "executor": "@glowdragon/nx-dokku:deploy",
@@ -53,7 +53,7 @@ After installation, you'll need to configure the deploy executor in the project'
 To deploy your Nx application to Dokku, navigate to the root directory of your Nx workspace and run:
 
 ```shell
-nx deploy <your-project-name>
+nx deploy <nxProjectName>
 ```
 
 This will push your project code to the configured Dokku host and deploy the application.
@@ -69,7 +69,7 @@ Ensure you've set up SSH key authentication with your Dokku host.
 The build directory should align with the path to the project directory. Configure the build directory by running the following command on the Dokku server:
 
 ```shell
-dokku builder:set build-dir apps/<your-project-name>
+dokku builder:set <dokkuAppName> build-dir apps/<nxProjectName>
 ```
 
 ## Support & Contributions
