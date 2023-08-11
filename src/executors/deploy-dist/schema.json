@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "title": "Deploy executor for distributable files",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "host": {
+      "type": "string",
+      "description": "The Dokku host to deploy to"
+    },
+    "app": {
+      "type": "string",
+      "description": "The name of the Dokku application"
+    },
+    "path": {
+      "type": "string",
+      "description": "The path to the distribution directory"
+    },
+    "localBranch": {
+      "type": "string",
+      "description": "The local branch to deploy",
+      "default": "main"
+    },
+    "dokkuBranch": {
+      "type": "string",
+      "description": "The branch to push to on Dokku",
+      "default": "master"
+    }
+  },
+  "required": ["host", "app", "path"]
+}
