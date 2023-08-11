@@ -1,14 +1,19 @@
 {
   "executors": {
-    "deploy": {
-      "implementation": "./src/executors/deploy/executor",
-      "schema": "./src/executors/deploy/schema.json",
-      "description": "Executor to deploy the project"
-    },
     "deploy-dist": {
       "implementation": "./src/executors/deploy-dist/executor",
       "schema": "./src/executors/deploy-dist/schema.json",
-      "description": "deploy-dist executor"
+      "description": "Executor to deploy the distributable directory"
+    },
+    "deploy-src": {
+      "implementation": "./src/executors/deploy-src/executor",
+      "schema": "./src/executors/deploy-src/schema.json",
+      "description": "Executor to deploy the source directory"
+    },
+    "deploy": {
+      "implementation": "./src/executors/deploy-src/executor-deprecated",
+      "schema": "./src/executors/deploy-src/schema.json",
+      "description": "Executor to deploy the source directory (deprecated)"
     }
   }
 }
