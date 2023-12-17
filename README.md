@@ -36,10 +36,10 @@ yarn add nx-dokku --dev
 
 Add a new target called `deploy` in your project's `project.json` file and configure one of the following executors:
 
-|               | Executor      | Description                                 |
-|---------------|---------------|---------------------------------------------|
-| a             | `deploy-dist` | Deploy your pre-built application to Dokku  |
-| b             | `deploy-src`  | Let Dokku build and deploy your application |
+|     | Executor      | Description                                 |
+| --- | ------------- | ------------------------------------------- |
+| a   | `deploy-dist` | Deploy your pre-built application to Dokku  |
+| b   | `deploy-src`  | Let Dokku build and deploy your application |
 
 ### Step 3a: Configure executor `deploy-dist`
 
@@ -49,7 +49,7 @@ To achieve this without tracking build files in your main repository, a local re
 #### Options
 
 | Option        | Description                                      | Default  |
-|---------------|--------------------------------------------------|----------|
+| ------------- | ------------------------------------------------ | -------- |
 | `host`        | The host of your Dokku server                    | None     |
 | `app`         | The name of your Dokku application               | None     |
 | `path`        | The path to the distributable directory          | None     |
@@ -82,7 +82,7 @@ Let Dokku build and serve the application after deploying the project source.
 #### Options
 
 | Option        | Description                                      | Default  |
-|---------------|--------------------------------------------------|----------|
+| ------------- | ------------------------------------------------ | -------- |
 | `host`        | The host of your Dokku server                    | None     |
 | `app`         | The name of your Dokku application               | None     |
 | `localBranch` | The local branch to deploy                       | `main`   |
