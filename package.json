@@ -1,11 +1,12 @@
 {
   "name": "@glowdragon/nx-dokku",
   "version": "1.0.2",
-  "description": "Nx plugin for deploying to Dokku",
+  "description": "Nx plugin to deploy your application to Dokku",
   "keywords": [
     "nx",
     "nx-plugin",
     "dokku",
+    "docker",
     "deployment",
     "ci"
   ],
@@ -13,10 +14,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Glowdragon/nx-dokku.git"
+    "url": "https://github.com/danielkreitsch/nx-dokku.git"
   },
   "bugs": {
-    "url": "https://github.com/Glowdragon/nx-dokku/issues"
+    "url": "https://github.com/danielkreitsch/nx-dokku/issues"
   },
   "main": "./src/index.js",
   "types": "./src/index.d.ts",

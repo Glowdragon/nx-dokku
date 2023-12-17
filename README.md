@@ -1,45 +1,52 @@
-# Nx Dokku
+<h1 align="center">Nx Dokku</h1>
 
 Deploy your Nx projects to Dokku with ease using this plugin. With a simple configuration, you can deploy your application directly to your Dokku server via `nx deploy`
 
+## Contents
+
+- 📦 [Installation](#-installation)
+- 🚀 [Usage](#-usage)
+- 🛠️ [Troubleshooting](#%EF%B8%8F-troubleshooting)
+- 🤝 [Support](#-support)
+
 ## 📦 Installation
 
-For `npm` users:
+### Prerequisites
+
+Make sure you have the following:
+
+- An existing Nx workspace
+- A buildable project set up within this workspace
+
+### Step 1: Install the plugin
+
+NPM:
 
 ```shell
-npm install @glowdragon/nx-dokku --save-dev
+npm install nx-dokku --save-dev
 ```
 
-For `yarn` users:
+Yarn:
 
 ```shell
-yarn add @glowdragon/nx-dokku --dev
+yarn add nx-dokku --dev
 ```
 
-## ⚒️ Executors
+### Step 2: Choose an executor
 
-After installation, you'll need to configure the deploy executor in the project's `project.json`
+Add a new target called `deploy` in your project's `project.json` file and configure one of the following executors:
 
-The plugin provides two executors:
+|               | Executor      | Description                                 |
+|---------------|---------------|---------------------------------------------|
+| a             | `deploy-dist` | Deploy your pre-built application to Dokku  |
+| b             | `deploy-src`  | Let Dokku build and deploy your application |
 
-| Executor                           | Description                                                           |
-|------------------------------------|-----------------------------------------------------------------------|
-| `@glowdragon/nx-dokku:deploy-dist` | Deploy your pre-built application to Dokku                            |
-| `@glowdragon/nx-dokku:deploy-src`  | Let Dokku build and serve the application after deploying the project |
-
-### Recommendations
-
-| Project Type | Recommended   | Note                                                                                                   |
-|--------------|---------------|--------------------------------------------------------------------------------------------------------|
-| JVM          | `deploy-src`  | Preferred for less configuration (no need for a Dockerfile)                                            |
-| Node         | `deploy-dist` | You can enable `generatePackageJson` in the build options to produce a project-specific `package.json` |
-
-## 🔧 Configuration of executor `deploy-dist`
+### Step 3a: Configure executor `deploy-dist`
 
 Deploy your pre-built application by pushing the distributable directory to Dokku.
 To achieve this without tracking build files in your main repository, a local repository will be generated within the distributable directory.
 
-### Options
+#### Options
 
 | Option        | Description                                      | Default  |
 |---------------|--------------------------------------------------|----------|
@@ -48,42 +55,31 @@ To achieve this without tracking build files in your main repository, a local re
 | `path`        | The path to the distributable directory          | None     |
 | `dokkuBranch` | The deploy branch to push to on the Dokku server | `master` |
 
-#### Example
+<details>
+<summary>Example</summary>
 
 ```json
 {
-  "projects": {
-    "your-nx-project": {
-      "architect": {
-        "build": {
-          "builder": "your-builder:build",
-          "options": {
-            "outputPath": "dist/apps/your-nx-project",
-            "main": "apps/your-nx-project/src/main.ts",
-            "assets": ["apps/your-nx-project/src/Procfile"]
-          }
-        },
-        "deploy": {
-          "executor": "@glowdragon/nx-dokku:deploy-dist",
-          "options": {
-            "host": "your-dokku-host.com",
-            "app": "your-dokku-app",
-            "path": "dist/apps/your-nx-project"
-          }
-        }
-      }
+  "deploy": {
+    "executor": "nx-dokku:deploy-dist",
+    "options": {
+      "host": "server.example.com",
+      "app": "my-dokku-app",
+      "path": "dist/apps/my-app"
     }
   }
 }
 ```
 
-## 🔧 Configuration of executor `deploy-src`
+</details>
+
+### Step 3b: Configure executor `deploy-src`
 
 Let Dokku build and serve the application after deploying the project source.
 
-**Note:** It's not recommended to use this executor for JS/TS projects due to the absence of a `package.json` in the project directory. Should you find a simple solution, I would be grateful for your support.
+**Note:** It's not recommended to use this executor for JS/TS projects due to the absence of a `package.json` in the project directory.
 
-### Options
+#### Options
 
 | Option        | Description                                      | Default  |
 |---------------|--------------------------------------------------|----------|
@@ -92,51 +88,51 @@ Let Dokku build and serve the application after deploying the project source.
 | `localBranch` | The local branch to deploy                       | `main`   |
 | `dokkuBranch` | The deploy branch to push to on the Dokku server | `master` |
 
-#### Example
+<details>
+<summary>Example</summary>
 
 ```json
 {
-  "projects": {
-    "your-nx-project": {
-      "architect": {
-        "deploy": {
-          "executor": "@glowdragon/nx-dokku:deploy-src",
-          "options": {
-            "host": "your-dokku-host.com",
-            "app": "your-dokku-app",
-            "localBranch": "main"
-          }
-        }
-      }
+  "deploy": {
+    "executor": "nx-dokku:deploy-src",
+    "options": {
+      "host": "server.example.com",
+      "app": "my-dokku-app",
+      "localBranch": "main"
     }
   }
 }
 ```
 
-### Dokku Configuration
+</details>
+
+#### Dokku Configuration
 
 When opting for the `deploy-src` executor, the build directory of the Dokku app should align with the path to the project directory. Configure the build directory by running the following command on the Dokku server:
 
 ```shell
-dokku builder:set <dokkuAppName> build-dir apps/<nxProjectName>
+dokku builder:set my-dokku-app build-dir apps/my-app
 ```
-
-## 🔐 Authentication
-
-Ensure you've set up SSH key authentication with your Dokku host.
 
 ## 🚀 Usage
 
-To deploy your Nx application to Dokku, navigate to the root directory of your Nx workspace and run:
+To deploy your application, run:
 
 ```shell
-nx deploy <nxProjectName>
+nx deploy my-app
 ```
 
-To unleash the true potential of Nx, use `nx run affected -t deploy` in your CI/CD pipeline:
+⭐ **Tip**: To unleash the true potential of Nx, use `nx run affected -t deploy` in your CI/CD pipeline.
 
-## 🤝 Support & Contributions
+## 🛠️ Troubleshooting
 
-Encountered issues or have improvement suggestions? Please [raise an issue](https://github.com/Glowdragon/nx-dokku/issues/new).
+### Host key verification failed
 
-Contributions are welcome! To help improve Nx Dokku, consider submitting a pull request.
+Ensure you've set up SSH key authentication with your Dokku host. Read more about it [here](https://dokku.com/docs/deployment/user-management/#ssh-keys).
+
+## 🤝 Support
+
+Encountered an issue or have suggestions for improvements?
+Feel free to [raise an issue](https://github.com/danielkreitsch/nx-dokku/issues/new).
+
+Contributions are welcome!
