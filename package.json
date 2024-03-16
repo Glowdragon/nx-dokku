@@ -3,12 +3,11 @@
   "version": "1.1.0",
   "description": "Nx plugin to deploy your application to Dokku",
   "keywords": [
-    "nx",
-    "nx-plugin",
-    "dokku",
-    "docker",
+    "cicd",
     "deployment",
-    "ci"
+    "docker",
+    "dokku",
+    "nx"
   ],
   "author": "Daniel Kreitsch <hello@danielkreitsch.com>",
   "license": "MIT",
